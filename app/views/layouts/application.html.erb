@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Terpsys</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller_path.gsub('/','-') %> <%= action_name %>">
+	<%= link_to_unless_current 'Home', root_path %>&nbsp;&nbsp;&nbsp;
+	<%= link_to_unless_current 'Users', users_path %>&nbsp;&nbsp;&nbsp;
+	page: <%= controller_path.gsub('/','-') %> <%= action_name %>
+	<p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+	<%= yield %>
+</body>
+</html>
