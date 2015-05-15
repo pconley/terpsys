@@ -10,10 +10,13 @@ gem 'colorize'
 gem 'devise', '~> 3.4.0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
-gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
+
+group :production, :staging do
+  gem "pg" # postgress db for heroku
+end
 
 group :development, :test do
   gem 'better_errors'
@@ -24,6 +27,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'spring'
+  gem 'sqlite3'
   gem 'web-console', '~> 2.0'
 end
 
