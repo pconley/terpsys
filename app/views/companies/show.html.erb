@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @company.name %>
@@ -50,5 +48,5 @@
   <%= @company.contact_email %>
 </p>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<%= link_to 'Edit this company', edit_company_path(@company) %> |
+<%= link_to 'Back to Companies List', companies_path %>

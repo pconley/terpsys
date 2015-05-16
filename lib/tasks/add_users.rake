@@ -4,13 +4,17 @@ namespace :db do
 
   task :add_users => :environment do
     users = [
-      { name: "pat", email: "pat@test.com"},
-      { name: "dan", email: "dan@test.com"}
+      { name: "pat", email: "pat@test.com", password: 'Password1'},
+      { name: "dan", email: "dan@test.com", password: 'Password1'}
     ]
-    puts "\nPopulate users"
-    User.destroy_all
+    puts "\nPopulate or Update Users"
     users.each do |params| 
-      user = User.create_with(params.merge({password: 'Password1'})).find_or_create_by(email: params[:email])
+      user = User.where(email: params[:email]).first
+      if user
+        user.update(params)
+      else
+        user = User.create(params)
+      end
       puts "+++ user = #{user}"
     end
     puts "done. count=#{User.count}\n\n"

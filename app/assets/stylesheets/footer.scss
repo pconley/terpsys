@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  margin-top: 30px;
+  background-color: pink;
+  justify-content: space-between;
+}
+
+.xfooter-section {
+  width: 500px;
+}
+
+.footer-right {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}

@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   #      :confirmable, :lockable, :timeoutable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  validates :name,     :presence => true
-  validates :email,    :presence => true
+  validates :name,     :presence => true, uniqueness: true
+  validates :email,    :presence => true, uniqueness: true
   validates :password, :presence => true
 
   # belongs_to :device
