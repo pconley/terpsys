@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   #attr_accessible :roles
 
   # belongs_to :device
-  # has_one :resolution
+  has_one :interpreter
   
   ROLES = %i[admin consumer employee interpreter]
   
@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     ROLES.reject do |r|
       ((roles_mask.to_i || 0) & 2**ROLES.index(r)).zero?
     end
+  end
+  
+  def has_role?(role)
+    roles.include?(role)
   end
 
   def to_s

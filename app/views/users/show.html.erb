@@ -1,12 +1,11 @@
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<p><strong>Name:</strong><%= @user.name %></p>
+<p><strong>Email:</strong><%= @user.email %></p>
+<p><strong>Roles:</strong><%= @user.roles %></p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<% if @user.has_role? :interpreter %>
+	<p><strong>Skill Level (H,M,L): </strong><%= @user.interpreter.try(:skill_level) %></p>
+	<p><strong>Hourly Rate (cents): </strong><%= @user.interpreter.try(:hourly_rate) %></p>
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
