@@ -4,8 +4,10 @@ namespace :db do
 
   task :add_users => :environment do
     users = [
-      { name: "pat", email: "pat@test.com", password: 'Password1'},
-      { name: "dan", email: "dan@test.com", password: 'Password1'}
+      { name: "pat", email: "pat@test.com", password: 'Password1', roles: [:admin] },
+      { name: "dan", email: "dan@test.com", password: 'Password1', roles: [:admin, :interpreter] },
+      { name: "tim", email: "tim@test.com", password: 'Password1', roles: [:consumer] },
+      { name: "ted", email: "ted@test.com", password: 'Password1', roles: [:interpreter] }
     ]
     puts "\nPopulate or Update Users"
     users.each do |params| 
