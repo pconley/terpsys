@@ -1,8 +1,8 @@
-# to execute this file... rake db:add_terps
+# to execute this file... rake db:add_interpeters
 
 namespace :db do
 
-  task :add_terps => :environment do
+  task :add_interpeters => :environment do
     terps = [            
       { name: "dan", email: "dan@test.com", password: 'Password1', skill_level: 'M', hourly_rate: '5500' },
       { name: "ted", email: "ted@test.com", password: 'Password1', skill_level: 'M', hourly_rate: '5600' },
@@ -22,8 +22,8 @@ namespace :db do
         terp_params = params.slice(:skill_level, :hourly_rate)
         terp = Interpreter.create(terp_params.merge(user: user))
       end
-      user.roles << :interpreter
-      user.save
+      user.roles += [:interpreter]
+      user.save!
       puts "+++ terp = #{terp}"
     end
     puts "done. count=#{Interpreter.count}\n\n"

@@ -1,0 +1,7 @@
+<p><strong>Name: </strong><%= @consumer.name %></p>
+<p><strong>Gender: </strong><%= @consumer.name %></p>
+<p><strong>Email: </strong><%= @consumer.user.email %></p>
+<p><strong>Roles: </strong><%= @consumer.user.roles %></p>
+
+<%= link_to 'Edit', edit_consumer_path(@consumer) %> |
+<%= link_to 'Back', consumers_path %>

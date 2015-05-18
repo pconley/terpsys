@@ -6,6 +6,8 @@ class Ability
     if user && user.has_role?(:admin)
       can :manage, User
       can :manage, Company
+      can :manage, Consumer
+      can :manage, Interpreter
     end
          
     # Define abilities for the passed in user here. For example:

@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  <%= link_to 'InSIP', root_path, class: "navbar-brand" %>
+	  <%= link_to 'TerpSYS', root_path, class: "navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -18,16 +18,19 @@
         	<li class="active"><%= link_to 'Companies', companies_path %><span class="sr-only">(current)</span></a></li>
 		<% end %>
 
-		<% if can? :manage, User %>
-        	<li><%= link_to 'Users', users_path %></li>
-		<% end %>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage! <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+			<% if can? :manage, Consumer %>
+	        	<li><%= link_to 'Consumers', consumers_path %></li>
+			<% end %>
+			<% if can? :manage, Interpreter %>
+	        	<li><%= link_to 'Interpreters', interpreters_path %></li>
+			<% end %>
+			<% if can? :manage, User %>
+	        	<li><%= link_to 'Users', users_path %></li>
+			<% end %>
             <li class="divider"></li>
             <li><a href="#">Separated link</a></li>
             <li class="divider"></li>

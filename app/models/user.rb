@@ -6,11 +6,13 @@ class User < ActiveRecord::Base
          
   validates :name,     :presence => true, uniqueness: true
   validates :email,    :presence => true, uniqueness: true
-  validates :password, :presence => true
+  
+  validates :password, :presence => true, :on => :create
   
   #attr_accessible :roles
 
   # belongs_to :device
+  has_one :consumer
   has_one :interpreter
   
   ROLES = %i[admin consumer employee interpreter]

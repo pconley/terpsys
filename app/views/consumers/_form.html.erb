@@ -1,0 +1,28 @@
+<%= form_for(@consumer) do |f| %>
+  <% if @consumer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@consumer.errors.count, "error") %> prohibited this consumer from being saved:</h2>last_
+      <ul>
+      <% @consumer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br>
+    <%= f.text_field :gender %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
