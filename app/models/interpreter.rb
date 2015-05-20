@@ -1,13 +1,12 @@
 class Interpreter < ActiveRecord::Base
   
   validates :user_id,     :presence => true, uniqueness: true
-  validates :skill_level, :presence => true
-  validates :hourly_rate, :presence => true
-  
+  validates :default_payrate, numericality: { only_integer: true }
+    
   belongs_to :user
   
   def to_s
-    "<Terp#{id} #{user.name} #{skill_level}>"
+    "<Terp#{id} #{user.email} #{default_payrate}>"
   end
   
 end

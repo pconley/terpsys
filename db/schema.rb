@@ -11,42 +11,104 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518102908) do
+ActiveRecord::Schema.define(version: 20150519121541) do
 
-  create_table "companies", force: :cascade do |t|
-    t.string   "name"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "contact_name"
-    t.string   "string"
-    t.string   "contact_phone"
-    t.string   "contact_email"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+  create_table "addresses", force: :cascade do |t|
+    t.string   "address_type"
+    t.string   "attention"
+    t.string   "street1",          null: false
+    t.string   "street2"
+    t.string   "city",             null: false
+    t.string   "state",            null: false
+    t.string   "zip",              null: false
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
+  add_index "addresses", ["addressable_id"], name: "index_addresses_on_addressable_id"
+
   create_table "consumers", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.string   "last_name",  null: false
-    t.string   "first_name", null: false
-    t.string   "gender",     null: false
-    t.string   "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",     null: false
+    t.string   "last_name",   null: false
+    t.string   "first_name",  null: false
+    t.string   "middle_name"
+    t.string   "title"
+    t.string   "prefix"
+    t.string   "suffix"
+    t.string   "gender"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "company_name"
+    t.string   "requester_name"
+    t.string   "requester_email"
+    t.string   "billing_email"
+    t.integer  "billing_rate"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "interpreters", force: :cascade do |t|
     t.integer  "user_id",         null: false
-    t.string   "skill_level",     null: false
-    t.integer  "hourly_rate",     null: false
-    t.string   "payment_address"
-    t.string   "payment_account"
+    t.string   "last_name",       null: false
+    t.string   "first_name",      null: false
+    t.string   "middle_name"
+    t.string   "title"
+    t.string   "prefix"
+    t.string   "suffix"
+    t.string   "gender"
+    t.integer  "default_payrate"
+    t.boolean  "certified"
+    t.string   "certification"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string   "status",               null: false
+    t.integer  "customer_id",          null: false
+    t.integer  "consumer_id",          null: false
+    t.integer  "interpreter_id"
+    t.string   "description"
+    t.datetime "starts_at",            null: false
+    t.integer  "duration",             null: false
+    t.datetime "requested_at",         null: false
+    t.string   "requested_by_name"
+    t.string   "requested_by_email"
+    t.string   "requested_by_phone"
+    t.text     "interpreter_notes"
+    t.integer  "interpreter_pay_rate"
+    t.string   "site_contact_name"
+    t.string   "site_contact_email"
+    t.string   "site_contact_phone"
+    t.text     "billing_notes"
+    t.integer  "billing_rate"
+    t.integer  "billable_minutes"
+    t.integer  "billing_miles"
+    t.boolean  "bill"
+    t.boolean  "pay"
+    t.integer  "payroll_minutes"
+    t.integer  "payroll_miles"
+    t.integer  "milage_rate"
+    t.integer  "expenses"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "phones", force: :cascade do |t|
+    t.string   "phone_type"
+    t.string   "number",         null: false
+    t.integer  "phoneable_id"
+    t.string   "phoneable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "phones", ["phoneable_id"], name: "index_phones_on_phoneable_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -59,7 +121,7 @@ ActiveRecord::Schema.define(version: 20150518102908) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "name"
+    t.string   "username"
     t.integer  "roles_mask"
     t.datetime "created_at"
     t.datetime "updated_at"

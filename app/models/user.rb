@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   #      :confirmable, :lockable, :timeoutable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  validates :name,     :presence => true, uniqueness: true
+  validates :username, :presence => true, uniqueness: true
   validates :email,    :presence => true, uniqueness: true
   
   validates :password, :presence => true, :on => :create
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    "<User#{id} #{name} #{email}>"
+    "<User#{id} #{email}>"
   end
   
 end

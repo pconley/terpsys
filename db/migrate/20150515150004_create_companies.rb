@@ -1,17 +1,11 @@
 class CreateCompanies < ActiveRecord::Migration
   def change
-    create_table :companies do |t|
-      t.string :name
-      t.string :address1
-      t.string :address2
-      t.string :city
-      t.string :state
-      t.string :zip
-      t.string :contact_name
-      t.string :string
-      t.string :contact_phone
-      t.string :contact_email
-
+    create_table :customers do |t|
+      t.string  :company_name
+      t.string  :requester_name
+      t.string  :requester_email
+      t.string  :billing_email
+      t.integer :billing_rate
       t.timestamps null: false
     end
   end

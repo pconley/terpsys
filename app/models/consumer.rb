@@ -7,6 +7,11 @@ class Consumer < ActiveRecord::Base
   
   belongs_to :user
   
+  delegate :roles, to: :user
+  
+  has_one  :address, :as => :addressable
+  has_many :phones,  :as => :phoneable
+  
   def to_s
     "<Consumer#{id} #{fullname} #{gender}>"
   end
