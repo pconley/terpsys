@@ -1,0 +1,6 @@
+<p> <strong>Company Name:</strong> <%= @customer.company_name %> </p>
+<p> <strong>Requester Name:</strong> <%= @customer.requester_name %> </p>
+<p> <strong>Requester Email:</strong> <%= @customer.requester_email %> </p>
+
+<%= link_to 'Edit this customer', edit_customer_path(@customer) %> |
+<%= link_to 'Back to Customers List', customers_path %>

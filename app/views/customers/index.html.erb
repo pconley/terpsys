@@ -1,0 +1,28 @@
+<h1>Customers</h1>
+
+<table class="table table-bordered">  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Requester</th>
+      <th>Requester Email</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= link_to customer.company_name, customer %></td>
+        <td><%= customer.requester_name %></td>
+        <td><%= customer.requester_email %></td>
+        <td><%= link_to 'Edit', edit_customer_path(customer), class: "button-edit" %></td>
+        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "button-destroy" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+<%= link_to 'New Customer', new_customer_path, class: "button-create" %>

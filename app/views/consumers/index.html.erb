@@ -17,9 +17,9 @@
         <td><%= consumer.gender %></td>
         <td><%= consumer.user.email %></td>
         <td><%= consumer.user.roles %></td>
-        <td><%= link_to 'Show', consumer %></td>
-        <td><%= link_to 'Edit', edit_consumer_path(consumer) %></td>
-        <td><%= link_to 'Destroy', consumer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', consumer, class: 'button-show' %></td>
+        <td><%= link_to 'Edit', edit_consumer_path(consumer), class: 'button-edit' %></td>
+        <td><%= link_to 'Destroy', consumer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-destroy' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -27,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New Consumer', new_consumer_path %>
+<%= link_to 'New Consumer', new_consumer_path, class: 'button-create' %>
