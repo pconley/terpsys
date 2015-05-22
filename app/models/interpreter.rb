@@ -5,6 +5,8 @@ class Interpreter < ActiveRecord::Base
     
   belongs_to :user
   
+  delegate :email, to: :user
+  
   def to_s
     "<Terp#{id} #{user.email} #{default_payrate}>"
   end

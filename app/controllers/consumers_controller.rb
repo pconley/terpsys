@@ -1,5 +1,8 @@
 class ConsumersController < ApplicationController
+  
   before_action :set_consumer, only: [:show, :edit, :update, :destroy]
+  
+  before_action { trace "params = #{params}"}
 
   def index
     @consumers = Consumer.all
@@ -10,18 +13,24 @@ class ConsumersController < ApplicationController
 
   def new
     @consumer = Consumer.new
+    @consumer.user = User.new
   end
 
   def edit
   end
 
   def create
+    @user = User.new(user_params)    
     @consumer = Consumer.new(consumer_params)
-
-    if @consumer.save
-      redirect_to @consumer, notice: 'Consumer was successfully created.'
-    else
+    unless @user.valid? && @consumer.valid?
       render :new
+      return
+    else
+      ActiveRecord::Base.transaction do
+        @user.save!
+        @consumer.save!
+      end
+      redirect_to @consumer, notice: 'Consumer was successfully created.' 
     end
   end
 
@@ -42,6 +51,10 @@ class ConsumersController < ApplicationController
   
   def set_consumer
     @consumer = Consumer.find(params[:id])
+  end
+  
+  def user_params
+    params.require(:user).permit(:username, :email)
   end
 
   def consumer_params

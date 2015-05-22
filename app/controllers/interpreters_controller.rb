@@ -45,7 +45,7 @@ class InterpretersController < ApplicationController
   end
 
   def interpreter_params
-    params.require(:interpreter).permit(:skill_level, :hourly_rate)
+    params.require(:interpreter).permit(:default_payrate)
   end
   
 end

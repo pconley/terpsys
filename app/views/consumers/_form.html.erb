@@ -1,14 +1,8 @@
 <%= form_for(@consumer) do |f| %>
-  <% if @consumer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@consumer.errors.count, "error") %> prohibited this consumer from being saved:</h2>last_
-      <ul>
-      <% @consumer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+
+  <%= render 'partials/model_errors', resource: @consumer %>
+
+  <label>User Name</label><br><input id="user.username" name="user[username]" type="text" />
 
   <div class="field">
     <%= f.label :last_name %><br>

@@ -1,1 +1,5 @@
-<div>controller:<%= controller_path.gsub('/','-') %> action:<%= action_name %> current_user:<%= current_user.try(:name) %> roles: <%= current_user.try(:roles) %></div>
+<div>controller:<%= controller_path.gsub('/','-') %> action:<%= action_name %> 
+	<% if current_user %>
+		current_user: <b><%= current_user.try(:username) %></b> roles: <%= current_user.try(:roles) %>
+	<% end %>
+</div>

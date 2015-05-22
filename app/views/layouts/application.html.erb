@@ -11,17 +11,8 @@
 	<%= render 'partials/debug_bar' %>
 	<%= render 'partials/header' %>
 	<%= render 'partials/alerts' %>
-    <div class="row">
-        <div id="sidebar" class="sidebar col-xs-3">
-        	sidebar
-        </div>
-        <div id="content" class="col-xs-9">
-			<%= yield %>
-        </div>
-    </div>
-    <div class="row">
-		<%= render 'partials/footer' %>
-	</div>
+	<%= yield %>
+	<%= render 'partials/footer' %>
 </div>
 </body>
 

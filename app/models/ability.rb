@@ -5,7 +5,7 @@ class Ability
         
     if user && user.has_role?(:admin)
       can :manage, User
-      can :manage, Company
+      can :manage, Customer
       can :manage, Consumer
       can :manage, Interpreter
     end
