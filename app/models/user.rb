@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   #attr_accessible :roles
 
   # belongs_to :device
-  has_one :consumer
-  has_one :interpreter
+  has_one :consumer,    :dependent => :destroy
+  has_one :interpreter, :dependent => :destroy
   
   ROLES = %i[admin consumer employee interpreter]
   

@@ -1,22 +1,17 @@
-<%= form_for(@consumer) do |f| %>
+<%= simple_form_for(@consumer) do |f| %>
 
   <%= render 'partials/model_errors', resource: @consumer %>
 
-  <label>User Name</label><br><input id="user.username" name="user[username]" type="text" />
+  <%= f.simple_fields_for :user do |p| %>
+  	<%= p.input :username %>
+  	<%= p.input :email %>
+  	<%= p.input :password %>
+  <% end %>
+  
+  <%= f.input :last_name %>
+  <%= f.input :first_name %>
+  <%= f.input :gender, collection: ['m','f'], prompt: "Select gender" %>
 
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.text_field :gender %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.button :submit, class: 'button-create' %>
+
 <% end %>

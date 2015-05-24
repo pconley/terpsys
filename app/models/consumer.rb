@@ -1,13 +1,17 @@
 class Consumer < ActiveRecord::Base
   
-  validates :user_id,     :presence => true, uniqueness: true
-  validates :last_name,   :presence => true
-  validates :first_name,  :presence => true
+  validates :last_name,  :presence => true
+  validates :first_name, :presence => true
   validates_inclusion_of :gender, :in => %w( m f )
   
   belongs_to :user
+  accepts_nested_attributes_for :user
+  attr_accessor :username, :email, :password
+  validates :user, :presence => true, uniqueness: true
   
-  delegate :roles, to: :user
+  delegate :email,    to: :user
+  delegate :roles,    to: :user
+  delegate :username, to: :user
   
   has_one  :address, :as => :addressable
   has_many :phones,  :as => :phoneable

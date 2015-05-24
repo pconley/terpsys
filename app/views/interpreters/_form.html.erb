@@ -1,12 +1,17 @@
-<%= form_for(@interpreter) do |f| %>
+<%= simple_form_for(@interpreter) do |f| %>
 
   <%= render 'partials/model_errors', resource: @interpreter %>
+
+  <%= f.simple_fields_for :user do |p| %>
+  	<%= p.input :username %>
+  	<%= p.input :email %>
+  	<%= p.input :password %>
+  <% end %>
   
-  <div class="field">
-    <%= f.label :default_payrate %> (cents)<br>
-    <%= f.text_field :default_payrate %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.input :last_name %>
+  <%= f.input :first_name %>
+  <%= f.input :default_payrate, collection: [30,35,40], prompt: "Select your rate" %>
+
+  <%= f.button :submit, class: 'button-create' %>
+
 <% end %>
