@@ -13,6 +13,9 @@ namespace :db do
         address: {street1: 'High Dr.', city: 'Pitts', state: 'PA', zip: '16666'}
       }
     ]
+    
+    Customer.destroy_all ###################
+    
     puts "\nPopulate Customers"
     customers.each do |params| 
       company_name = params[:customer][:company_name]

@@ -8,6 +8,9 @@ namespace :db do
       { username: "dan", email: "dan@test.com", password: 'Password1', roles: [:admin] },
       { username: "tim", email: "tim@test.com", password: 'Password1', roles: [:consumer] }
     ]
+    
+    User.destroy_all ###################
+    
     puts "\nPopulate or Update Users"
     users.each do |params| 
       user = User.where(email: params[:email]).first

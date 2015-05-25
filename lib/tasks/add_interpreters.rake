@@ -12,6 +12,9 @@ namespace :db do
       { username: "t2b", email: "t2b@test.com", password: 'Password1', default_payrate: '4500', last_name: 'terper', first_name: '2b' }
     ]
     puts "\nPopulate or Update Interpreters"
+    
+    Interpreter.destroy_all ###################
+    
     terps.each do |params|
       # first find or create the associated user record
       user_params = params.slice(:username, :email, :password, :roles)

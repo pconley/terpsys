@@ -10,6 +10,9 @@ namespace :db do
       { username: "c2a", email: "c2a@test.com", password: 'Password1', gender: 'm', first_name: 'con-a', last_name: 'two' },
       { username: "c2b", email: "c2b@test.com", password: 'Password1', gender: 'f', first_name: 'con-b', last_name: 'two' }
     ]
+    
+    Customer.destroy_all ###################
+    
     puts "\nPopulate or Update Consumers"
     consumers.each do |params|
       # first find or create the associated user record
