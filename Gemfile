@@ -4,6 +4,8 @@ gem 'rails', '4.2.1'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-timepicker-rails'
 gem 'cancancan', '~> 1.10'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'colorize'

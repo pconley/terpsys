@@ -4,9 +4,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   
+  resources :jobs
   resources :users
   resources :consumers
   resources :customers
   resources :interpreters
-  
 end

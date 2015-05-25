@@ -1,0 +1,37 @@
+
+<%= simple_form_for(@job) do |f| %>
+
+  <%= render 'partials/model_errors', resource: @job %>
+
+  <%= f.label :starts_on %>
+  <% today = Date.today.strftime("%m/%d/%Y") %>
+  <input type="text" id='job_starts_on' name='job[starts_on]' data-provide='datepicker' 
+		value='<%= today %>' data-date-start-date='<%= today %>' data-date-format='yyyy-mm-dd' >
+  &nbsp;<%= f.label :at %>
+  <span class="bootstrap-timepicker"><input id="job_starts_at" name='job[starts_at]' type="text" class="input-small"></span>
+  &nbsp;<%= f.label :for %>
+  <%= f.input_field :duration, collection: [30, 60, 90, 120, 240], include_blank: false %> Minutes
+
+
+  <br><%= f.label :repeats %>
+  <%= f.input_field :repeat_style, collection: ['None', 'Monthly', 'Weekly', 'Weekdays', 'Daily'], include_blank: false %>
+  <%= f.label :until %>: <input type="text" id='job_ends_on' name='job[ends_on]' data-provide='datepicker' 
+		value='<%= today %>' data-date-start-date='<%= today %>'>
+
+  <script type="text/javascript">
+    $('#job_starts_at').timepicker({
+        minuteStep: 15,
+        showInputs: true,
+        disableFocus: true
+    });
+  </script>
+
+  <br><%= f.label :description %> <%= f.input_field :description, style:"width: 500px !important;" %>
+
+  <%= f.association :customer,    label_method: :company_name, value_method: :id, include_blank: false %>
+  <%= f.association :consumer,    label_method: :email,        value_method: :id, include_blank: false %>
+  <%= f.association :interpreter, label_method: :email,        value_method: :id, include_blank: false %>
+
+  <%= f.button :submit, class: 'button-create' %>
+
+<% end %>

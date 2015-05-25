@@ -5,6 +5,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Jobs</th>
       <th>Default Rate</th>
       <th>Email</th>
       <th>Roles</th>
@@ -16,9 +17,10 @@
     <% @interpreters.each do |interpreter| %>
       <tr>
         <td><%= interpreter.user.username %></td>
+        <td><%= interpreter.jobs.count %></td>
         <td><%= interpreter.default_payrate %></td>
         <td><%= interpreter.user.email %></td>
-        <td><%= interpreter.user.roles %></td>
+        <td><%= interpreter.user.roles_string %></td>
         <td><%= link_to 'Show', interpreter, class: 'button-show' %></td>
         <td><%= link_to 'Edit', edit_interpreter_path(interpreter), class: 'button-edit' %></td>
         <td><%= link_to 'Destroy', interpreter, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-destroy' %></td>

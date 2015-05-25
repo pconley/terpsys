@@ -1,6 +1,9 @@
-<p> <strong>Company Name:</strong> <%= @customer.company_name %> </p>
+<h2><%= @customer.company_name %></h2>
+
 <p> <strong>Requester Name:</strong> <%= @customer.requester_name %> </p>
 <p> <strong>Requester Email:</strong> <%= @customer.requester_email %> </p>
+
+<%= render 'partials/jobs_table', resource: @customer, view: :customer %>
 
 <%= link_to 'Edit this customer', edit_customer_path(@customer) %> |
 <%= link_to 'Back to Customers List', customers_path %>

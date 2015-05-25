@@ -16,8 +16,8 @@
 	
 		<% if current_user %>
 	
-				<% if can? :manage, Customer %>
-		        	<li class="active"><%= link_to 'Customers', customers_path %><span class="sr-only">(current)</span></a></li>
+				<% if can? :manage, Job %>
+		        	<li class="active"><%= link_to 'Jobs', jobs_path %><span class="sr-only">(current)</span></a></li>
 				<% end %>
 
 		        <li class="dropdown">
@@ -34,7 +34,7 @@
 			        	<li><%= link_to 'Users', users_path %></li>
 					<% end %>
 		            <li class="divider"></li>
-		            <li><a href="#">One more separated link</a></li>
+		        	<li class="active"><%= link_to 'Customers', customers_path %><span class="sr-only">(current)</span></a></li>
 		          </ul>
 		        </li>
 		<% end %>

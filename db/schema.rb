@@ -73,9 +73,15 @@ ActiveRecord::Schema.define(version: 20150519121541) do
     t.integer  "customer_id",          null: false
     t.integer  "consumer_id",          null: false
     t.integer  "interpreter_id"
-    t.string   "description"
+    t.string   "description",          null: false
+    t.datetime "starts_on",            null: false
     t.datetime "starts_at",            null: false
     t.integer  "duration",             null: false
+    t.boolean  "repeats",              null: false
+    t.string   "repeat_style"
+    t.string   "repeat_pattern"
+    t.datetime "ends_on"
+    t.datetime "ends_by"
     t.datetime "requested_at",         null: false
     t.string   "requested_by_name"
     t.string   "requested_by_email"

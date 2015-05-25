@@ -3,5 +3,7 @@
 <p><strong>Email: </strong><%= @consumer.user.email %></p>
 <p><strong>Roles: </strong><%= @consumer.user.roles %></p>
 
+<%= render 'partials/jobs_table', resource: @consumer, view: :consumer %>
+
 <%= link_to 'Edit', edit_consumer_path(@consumer) %> |
 <%= link_to 'Back', consumers_path %>

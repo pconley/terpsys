@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
   def has_role?(role)
     roles.include?(role)
   end
+  
+  def roles_string
+    roles.map(&:capitalize).join(", ")
+  end
 
   def to_s
     "<User#{id} #{email}>"

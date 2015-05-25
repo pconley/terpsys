@@ -3,6 +3,7 @@
 <table class="table table-bordered">  <thead>
     <tr>
       <th>Company</th>
+      <th>Jobs</th>
       <th>Requester</th>
       <th>Requester Email</th>
       <th colspan="2"></th>
@@ -13,6 +14,7 @@
     <% @customers.each do |customer| %>
       <tr>
         <td><%= link_to customer.company_name, customer %></td>
+        <td><%= customer.jobs.count %></td>
         <td><%= customer.requester_name %></td>
         <td><%= customer.requester_email %></td>
         <td><%= link_to 'Edit', edit_customer_path(customer), class: "button-edit" %></td>

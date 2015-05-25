@@ -15,6 +15,7 @@ class Consumer < ActiveRecord::Base
   
   has_one  :address, :as => :addressable
   has_many :phones,  :as => :phoneable
+  has_many :jobs
   
   def to_s
     "<Consumer#{id} #{fullname} #{gender}>"

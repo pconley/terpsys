@@ -7,10 +7,16 @@ class AddJobsTable < ActiveRecord::Migration
       t.integer :consumer_id,    null: false
       t.integer :interpreter_id
       
-      t.string    :description
+      t.string    :description,   null: false
       # location is a polymorphic address
-      t.timestamp :starts_at,    null: false
-      t.integer   :duration,     null: false
+      t.timestamp :starts_on,     null: false
+      t.timestamp :starts_at,     null: false
+      t.integer   :duration,      null: false
+      t.boolean   :repeats,       null: false
+      t.string    :repeat_style
+      t.string    :repeat_pattern
+      t.timestamp :ends_on
+      t.timestamp :ends_by
       
       t.timestamp :requested_at, null: false
       t.string    :requested_by_name
