@@ -1,0 +1,35 @@
+<h3>Jobs (List View)</h3>
+<div class="table-responsive">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Job#</th>
+      <th>State</th>
+	  <% if view != :interpreter %>
+	  	<th>Interpreter</th>
+	  <% end %>
+	  <% if view != :consumer %>
+	  	<th>Consumer</th>
+	  <% end %>
+      <th>When</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% events.each do |job| %>
+      <tr>
+        <td><%= job.id %></td>
+        <td><%= job.state.to_s.capitalize %></td>
+		<% if view != :interpreter %>
+			  <td><%= job.interpreter.username %></td>
+		<% end %>
+		<% if view != :consumer %>
+			  <td><%= job.consumer.fullname %></td>
+		<% end %>
+        <td><%= job.when %></td>
+        <td><%= job.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

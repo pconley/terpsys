@@ -1,0 +1,35 @@
+.calendar td { }
+
+.calendar table { 
+	margin: 0; 
+	padding: 10px;
+	border: 3px solid red;
+}
+
+.calendar td { 
+	margin: 0; padding: 2px; vertical-align: top; 
+	height: 100px; width: 14.28%;
+}
+
+.calendar thead { 
+	padding:2px; background-color:#d4d4d4; color:#aaa; 
+	text-align:center; font-size:120%; 
+	font-weight:bold; 
+}
+
+.dow td   { color:#aaa; text-align:center; font-size:110%; }
+.today    { background-color:#ddd; }
+
+.calendar header {
+    border: none;
+    margin: 0;
+    padding: 1pt 1.5pt;
+    font-weight: bold;
+    font-size: 8pt;
+    text-align: left;
+    background-color: #eee;
+}
+
+#bodyContent table.month a { background:none; padding:0 }
+.day-active { color:#0000cc }
+.day-empty  { color:#cc0000 }

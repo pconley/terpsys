@@ -1,0 +1,11 @@
+<h3>Jobs (Month View)</h3>
+<div class='calendar job-calendar'>
+<%= month_calendar events: events do |date,jobs| %>
+	<%= date.strftime("%d") %>
+	<% jobs.each do |job| %>
+    <div>
+		<%= link_to "Job##{job.id}", job %>
+    </div>
+  <% end %>
+<% end %>
+</div>
