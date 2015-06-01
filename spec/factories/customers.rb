@@ -5,6 +5,7 @@ FactoryGirl.define do
     requester_email { Faker::Internet.email }
     billing_email { Faker::Internet.email }
     billing_rate  { Faker::Number.number(4) }
-    address { FactoryGirl.create(:address) }
+    agency  { FactoryGirl.create(:agency) }
+    # addresses { [FactoryGirl.create(:address)] }
   end
 end

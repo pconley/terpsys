@@ -11,20 +11,27 @@ RSpec.describe CustomersController, type: :controller do
   }
 
   let(:valid_session) { {} }
-
+  
+  before :each do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+    @agency = @user.agency
+    @customer1 = FactoryGirl.create(:customer, agency: @agency)
+    @customer2 = FactoryGirl.create(:customer, agency: @agency)
+  end
+    
   describe "GET #index" do
     it "assigns all customers as @customers" do
       customer = Customer.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:customers)).to eq([customer])
+      expect(assigns(:customers)).to eq([@customer1,@customer2])
     end
   end
 
   describe "GET #show" do
     it "assigns the requested customer as @customer" do
-      customer = Customer.create! valid_attributes
-      get :show, {:id => customer.to_param}, valid_session
-      expect(assigns(:customer)).to eq(customer)
+      get :show, {:id => @customer1.to_param}, valid_session
+      expect(assigns(:customer)).to eq(@customer1)
     end
   end
 
@@ -37,9 +44,8 @@ RSpec.describe CustomersController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested customer as @customer" do
-      customer = Customer.create! valid_attributes
-      get :edit, {:id => customer.to_param}, valid_session
-      expect(assigns(:customer)).to eq(customer)
+      get :edit, {:id => @customer1.to_param}, valid_session
+      expect(assigns(:customer)).to eq(@customer1)
     end
   end
 
@@ -79,39 +85,33 @@ RSpec.describe CustomersController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        FactoryGirl.attributes_for(:customer, company_name: 'Acme')
+        FactoryGirl.attributes_for(:customer, agency: @agency)
       }
 
       it "updates the requested customer" do
-        customer = Customer.create! valid_attributes
-        put :update, {:id => customer.to_param, :customer => new_attributes}, valid_session
-        customer.reload
-        expect(customer.company_name).to eq('Acme')
+        put :update, {:id => @customer1.to_param, :customer => new_attributes}, valid_session
+        expect(@customer1.reload.company_name).to eq(new_attributes[:company_name])
       end
 
       it "assigns the requested customer as @customer" do
-        customer = Customer.create! valid_attributes
-        put :update, {:id => customer.to_param, :customer => valid_attributes}, valid_session
-        expect(assigns(:customer)).to eq(customer)
+        put :update, {:id => @customer1.to_param, :customer => valid_attributes}, valid_session
+        expect(assigns(:customer)).to eq(@customer1)
       end
 
       it "redirects to the customer" do
-        customer = Customer.create! valid_attributes
-        put :update, {:id => customer.to_param, :customer => valid_attributes}, valid_session
-        expect(response).to redirect_to(customer)
+        put :update, {:id => @customer1.to_param, :customer => valid_attributes}, valid_session
+        expect(response).to redirect_to(@customer1)
       end
     end
 
     context "with invalid params" do
       it "assigns the customer as @customer" do
-        customer = Customer.create! valid_attributes
-        put :update, {:id => customer.to_param, :customer => invalid_attributes}, valid_session
-        expect(assigns(:customer)).to eq(customer)
+        put :update, {:id => @customer1.to_param, :customer => invalid_attributes}, valid_session
+        expect(assigns(:customer)).to eq(@customer1)
       end
 
       it "re-renders the 'edit' template" do
-        customer = Customer.create! valid_attributes
-        put :update, {:id => customer.to_param, :customer => invalid_attributes}, valid_session
+        put :update, {:id => @customer1.to_param, :customer => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
     end
@@ -119,15 +119,13 @@ RSpec.describe CustomersController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested customer" do
-      customer = Customer.create! valid_attributes
       expect {
-        delete :destroy, {:id => customer.to_param}, valid_session
+        delete :destroy, {:id => @customer1.to_param}, valid_session
       }.to change(Customer, :count).by(-1)
     end
 
     it "redirects to the customers list" do
-      customer = Customer.create! valid_attributes
-      delete :destroy, {:id => customer.to_param}, valid_session
+      delete :destroy, {:id => @customer1.to_param}, valid_session
       expect(response).to redirect_to(customers_url)
     end
   end

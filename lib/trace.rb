@@ -1,7 +1,7 @@
 module Trace
 
   def trace(s)
-    puts s.blue unless Rails.env.test? 
+    puts s.blue # unless Rails.env.test? 
   end
   
   def error(s)

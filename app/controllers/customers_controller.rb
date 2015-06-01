@@ -3,14 +3,22 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @customers = Customer.all
+    trace "*** CustomerController#index #{current_agency}"
+    @customers = current_agency.customers.to_a
   end
 
   def show
   end
 
   def new
-    @customer = Customer.new
+    dummy = {
+      company_name:    Faker::Company.name,
+      requester_name:  Faker::Name.name,
+      requester_email: Faker::Internet.email,
+      billing_email:   Faker::Internet.email,
+      billing_rate:    Faker::Number.number(4) 
+    }
+    @customer = Customer.new( dummy )
   end
 
   def edit
@@ -18,10 +26,11 @@ class CustomersController < ApplicationController
 
   def create
     trace "*** CustomerController#create #{params}"
-    @customer = Customer.new(customer_params)
+    @customer = current_agency.customers.build(customer_params)
+    trace "--- new customer = #{@customer}"
 
     if @customer.save
-      trace "--- success"
+      trace "--- success #{@customer}"
       redirect_to @customer, notice: 'Customer was successfully created.'
     else
       trace "--- failure errors=#{@customer.errors.full_messages}"
@@ -30,9 +39,12 @@ class CustomersController < ApplicationController
   end
 
   def update
+    trace "*** CustomerController#update customer_params = #{customer_params}"
     if @customer.update(customer_params)
+      trace "--- success #{@customer.inspect}"
       redirect_to @customer, notice: 'Customer was successfully updated.'
     else
+      trace "--- failure errors=#{@customer.errors.full_messages}"
       render :edit
     end
   end
@@ -45,7 +57,7 @@ class CustomersController < ApplicationController
   private  
   
   def set_customer
-    @customer = Customer.find(params[:id])
+    @customer = current_agency.customers.find(params[:id])
   end
 
   def customer_params

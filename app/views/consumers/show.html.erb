@@ -1,9 +1,11 @@
-<p><strong>Name: </strong><%= @consumer.fullname %></p>
-<p><strong>Gender: </strong><%= @consumer.gender %></p>
-<p><strong>Email: </strong><%= @consumer.user.email %></p>
-<p><strong>Roles: </strong><%= @consumer.user.roles %></p>
+<h3>Consumer#<%= @user.id %>: <%= @user.email %></h3>
 
-<%= render 'partials/jobs_table', resource: @consumer, view: :consumer %>
+<p><strong>Name: </strong><%= @user.fullname %></p>
 
-<%= link_to 'Edit', edit_consumer_path(@consumer) %> |
-<%= link_to 'Back', consumers_path %>
+<%= link_to 'Edit Consumer Info', edit_consumer_path(@user) %> |
+<%= link_to 'Go to Consumers List', consumers_path %>
+
+<%= render 'partials/jobs_month', resource: @user, events: @user.consumer_jobs, view: :consumer %>
+<%= render 'partials/jobs_table', resource: @user, events: @user.consumer_jobs, view: :consumer %>
+<%= render 'partials/jobs_action', resource: @user, events: @user.consumer_jobs, view: :consumer %>
+

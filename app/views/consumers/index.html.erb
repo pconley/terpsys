@@ -2,22 +2,22 @@
 
 <table class="table table-hover">  <thead>
     <tr>
+      <th>ID</th>
       <th>Name</th>
       <th>Jobs</th>
-      <th>Gender</th>
       <th>Email</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @consumers.each do |consumer| %>
+    <% @users.each do |consumer| %>
       <tr>
+        <td><%= consumer.id %></td>
         <td><%= consumer.fullname %></td>
-        <td><%= consumer.jobs.count %></td>
-        <td><%= consumer.gender %></td>
-        <td><%= consumer.user.email %></td>
-        <td><%= link_to 'Show', consumer, class: 'button-show' %></td>
+        <td><%= consumer.consumer_jobs.count %></td>
+        <td><%= consumer.email %></td>
+        <td><%= link_to 'Show', consumer_path(consumer), class: 'button-show' %></td>
         <td><%= link_to 'Edit', edit_consumer_path(consumer), class: 'button-edit' %></td>
         <td><%= link_to 'Destroy', consumer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-destroy' %></td>
       </tr>

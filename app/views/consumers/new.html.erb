@@ -1,5 +1,13 @@
 <h1>New Consumer</h1>
 
-<%= render 'form' %>
+<%= simple_form_for(@user, :url => { :controller => "consumers", :action => "create" },) do |f| %>
+  <%= render 'partials/model_errors', resource: @user %>
+  <%= f.input :username %>
+  <%= f.input :email %>  
+  <%= f.input :password %>
+  <%= f.input :last_name %>
+  <%= f.input :first_name %>
+  <%= f.button :submit, 'Save Consumer', class: 'button-create' %>
+<% end %>
 
-<%= link_to 'Back', consumers_path %>
+<%= link_to 'Back to List of Consumers', interpreters_path %>

@@ -2,14 +2,20 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   def index
-    @jobs = Job.order('created_at DESC').all
+    @jobs = current_agency.jobs.order('created_at DESC').all
   end
 
   def show
   end
 
   def new
-    @job = Job.new
+    agency = current_agency
+    @job = Job.new({
+      agency_id: agency.id,
+      customer: agency.customers.first,
+      consumer_id: agency.consumers.first.id,
+      interpreter_id: agency.interpreters.first.id
+    })
   end
 
   def edit
@@ -19,7 +25,7 @@ class JobsController < ApplicationController
     trace "*** JobsController#create job params = #{job_params}"
     convert_date('starts_on') # changes the params
     trace "--- revised job params = #{job_params}"
-    @job = Job.new(job_params)
+    @job = Job.new(job_params.merge(agency: current_agency))
     @job.repeats = @job.repeat_style != 'None'
     @job.requested_at = Time.zone.now
     @job.status ||= 'Active'
@@ -55,7 +61,7 @@ class JobsController < ApplicationController
   end
   
   def set_job
-    @job = Job.find(params[:id])
+    @job = current_agency.jobs.find(params[:id])
   end
 
   def job_params

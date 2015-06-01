@@ -1,5 +1,5 @@
 <div>controller:<%= controller_path.gsub('/','-') %> action:<%= action_name %> 
-	<% if current_user %>
-		current_user: <b><%= current_user.try(:username) %></b> roles: <%= current_user.try(:roles) %>
-	<% end %>
+    user: <b><%= current_user.try(:username) %></b> 
+    roles: <%= current_user.try(:roles) %>
+	agency: <b><%= current_agency.try(:agency_name) %></b>
 </div>

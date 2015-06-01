@@ -1,8 +1,9 @@
-<h3><%= @interpreter.user.username %> (<%= @interpreter.user.email %>)</h3>
-<p><strong>Roles: </strong><%= @interpreter.user.roles %></p>
-<p><strong>Default Rate (cents): </strong><%= @interpreter.default_payrate %></p>
+<h3>#<%= @user.id %>: <%= @user.username %> (<%= @user.email %>)</h3>
+<p><strong>Roles: </strong><%= @user.roles_to_s %></p>
+<p><strong>Default Rate: </strong><%= format_as_dollars(@user.default_payrate) %></p>
 
-<%= render 'partials/jobs_table', resource: @interpreter, view: :interpreter %>
+<%= render 'partials/jobs_month', resource: @user, events: @user.interpreter_jobs, view: :interpreter %>
+<%= render 'partials/jobs_table', resource: @user, events: @user.interpreter_jobs, view: :interpreter %>
 
-<%= link_to 'Edit', edit_interpreter_path(@interpreter) %> |
-<%= link_to 'Back', interpreters_path %>
+<%= link_to 'Edit', edit_interpreter_path(@user) %> |
+<%= link_to 'Go to Interpreters List', interpreters_path %>

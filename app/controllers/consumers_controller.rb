@@ -1,20 +1,21 @@
 class ConsumersController < ApplicationController
-  
-  before_action :set_consumer, only: [:show, :edit, :update, :destroy]
-  
-  before_action { trace "params = #{params}"}
+    
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @consumers = Consumer.order('created_at DESC').all
+    @users = current_agency.consumers.order('created_at DESC').all
   end
 
   def show
   end
 
   def new
-    name = "test#{rand(1000000)}"
-    @consumer = Consumer.new(last_name: name, first_name: 'test', gender: 'm')
-    @consumer.build_user(username: name, email: "#{name}@test.com")
+    name = "test#{rand(1000000)}" # test data
+    last = Faker::Name.last_name
+    first = Faker::Name.first_name
+    @user = User.new(last_name: last, first_name: first, 
+      default_payrate: 3500, roles: [:consumer], 
+      username: name, email: "#{name}@consumer.com")
   end
 
   def edit
@@ -22,44 +23,40 @@ class ConsumersController < ApplicationController
 
   def create
     trace "*** ConsumersController#create #{params}"
-    @consumer = Consumer.create(consumer_params)
-    @consumer.build_user(user_params)
-    @consumer.user.roles = [:consumer]
-    trace "--- consumer = #{@consumer.inspect}"
-    trace "--- user rec = #{@consumer.user.inspect}"
-    if @consumer.save
-      redirect_to @consumer, notice: 'Consumer was successfully created.'
+    @user = User.create(user_params.merge(agency: current_agency, roles: [:consumer]))
+    if @user.save
+      redirect_to consumer_path(@user), notice: 'Consumer was successfully created.'
     else
-      trace "--- consumer save failed, errors = #{@consumer.errors.full_messages}"
+      trace "--- user save failed, errors = #{@user.errors.full_messages}"
       render :new
     end
   end
 
   def update
-    if @consumer.update(consumer_params)
-      redirect_to @consumer, notice: 'Consumer was successfully updated.'
+    trace "*** ConsumersController#update #{params}"
+    # only pass the password to update if user entered one so delete
+    params[:user].delete(:password) if params[:user][:password] == ''
+    if @user.update(user_params)
+      redirect_to consumer_path(@user), notice: 'Consumer was successfully updated.'
     else
+      trace "--- user save failed, errors = #{@user.errors.full_messages}"
       render :edit
     end
   end
 
   def destroy
-    @consumer.user.destroy # destroy the user which cascades to the consumer
+    @user.destroy
     redirect_to consumers_url, notice: 'Consumer was successfully destroyed.'
   end
 
   private
   
-  def set_consumer
-    @consumer = Consumer.find(params[:id])
-  end
-  
-  def consumer_params
-    params.require(:consumer).permit(:last_name,:first_name,:gender)
+  def set_user
+    @user = current_agency.consumers.find(params[:id])
   end
   
   def user_params
-    params.require(:consumer).require(:user_attributes).permit(:username,:email,:password)
+    params.require(:user).permit(:username,:email,:password,:last_name,:first_name,:default_payrate)
   end
-  
+    
 end

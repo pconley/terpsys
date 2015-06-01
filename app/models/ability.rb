@@ -4,11 +4,10 @@ class Ability
   def initialize(user)
         
     if user && user.has_role?(:admin)
-      can :manage, User
+      # can :manage, User
       can :manage, Job
       can :manage, Customer
-      can :manage, Consumer
-      can :manage, Interpreter
+      can :manage, User, :interpreter => true
     end
          
     # Define abilities for the passed in user here. For example:

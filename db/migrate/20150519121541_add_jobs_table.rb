@@ -2,14 +2,15 @@ class AddJobsTable < ActiveRecord::Migration
   def change
     create_table :jobs do |t|
       
+      t.integer :agency_id, null: false
+      
       t.string  :status,         null: false
       t.integer :customer_id,    null: false
-      t.integer :consumer_id,    null: false
+      t.integer :consumer_id
       t.integer :interpreter_id
       
       t.string    :description,   null: false
       # location is a polymorphic address
-      t.timestamp :starts_on,     null: false
       t.timestamp :starts_at,     null: false
       t.integer   :duration,      null: false
       t.boolean   :repeats,       null: false

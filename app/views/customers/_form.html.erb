@@ -1,19 +1,13 @@
-<%= simple_form_for(@consumer) do |f| %>
+<%= simple_form_for(@customer) do |f| %>
 
-  <%= render 'partials/model_errors', resource: @consumer %>
+	<%= render 'partials/model_errors', resource: @customer %>
 
-  <%= f.simple_fields_for :user do |p| %>
-  	<%= p.input :username %>
-  	<%= p.input :email %>
-  	<%= p.input :password %>
-  <% end %>
-  
-  <%= f.input :company_name %>
-  <%= f.input :requester_name %>
-  <%= f.input :requester_email %>
-  <%= f.input :billing_email %>
-  <%= f.input :billing_rate, collection: [30,35,40], prompt: "Select your rate" %>
+	<%= f.input :company_name %>
+	<%= f.input :requester_name %>  
+	<%= f.input :requester_email %>
+	<%= f.input :billing_email %>
+	<%= f.input :billing_rate %>
 
-  <%= f.button :submit, class: 'button-create' %>
-
+	<%= f.button :submit, 'Save Consumer', class: 'button-create' %>
+	
 <% end %>

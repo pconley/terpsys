@@ -1,16 +1,18 @@
 <h2>Job#<%= @job.id %></h2>
-<p><strong>Requested At: </strong><%= @job.starts_at.strftime('%Y-%m-%d %H:%M') %></p>
 <p><strong>Status: </strong><%= @job.status %></p>
+<p><strong>State: </strong><%= @job.state.to_s.capitalize %></p>
+<p><strong>Agency: </strong><%= @job.agency.agency_name %></p>
 <p><strong>Customer: </strong><%= @job.customer.company_name %></p>
-<p><strong>Consumer: </strong><%= @job.consumer.email %></p>
-<p><strong>Interpreter: </strong><%= @job.interpreter.try(:email) %></p>
+<p><strong>Consumer#: </strong><%= @job.consumer_id %></p>
+<p><strong>Interpreter#: </strong><%= @job.interpreter_id %></p>
 <p><strong>Description: </strong><%= @job.description %></p>
 <p><strong>When: </strong><%= @job.when %></p>
+<p><strong>Starts at: </strong><%= @job.starts_at %></p>
 <p><strong>Repeats: </strong><%= @job.repeats %></p>
 <p><strong>Repeat Style: </strong><%= @job.repeat_style %></p>
 <p><strong>Repeat Pattern: </strong><%= @job.repeat_pattern %></p>
 <p><strong>Ends On: </strong><%= @job.ends_on.strftime('%Y-%m-%d')  if @job.ends_on %></p>
-
+<p><strong>Requested At: </strong><%= @job.starts_at.strftime('%Y-%m-%d %H:%M') %></p>
 <p><strong>Requested By: </strong><%= @job.requested_by_name %></p>
 <p><strong>-- Email: </strong><%= @job.requested_by_email %></p>
 <p><strong>-- Phone: </strong><%= @job.requested_by_phone %></p>

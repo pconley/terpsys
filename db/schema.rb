@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519121541) do
+ActiveRecord::Schema.define(version: 20150526111930) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "address_type"
+    t.string   "location"
     t.string   "attention"
     t.string   "street1",          null: false
     t.string   "street2"
@@ -27,22 +27,23 @@ ActiveRecord::Schema.define(version: 20150519121541) do
     t.datetime "updated_at",       null: false
   end
 
-  add_index "addresses", ["addressable_id"], name: "index_addresses_on_addressable_id"
+  add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
 
-  create_table "consumers", force: :cascade do |t|
-    t.integer  "user_id",     null: false
-    t.string   "last_name",   null: false
-    t.string   "first_name",  null: false
-    t.string   "middle_name"
-    t.string   "title"
-    t.string   "prefix"
-    t.string   "suffix"
-    t.string   "gender"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "agencies", force: :cascade do |t|
+    t.string   "agency_name",   null: false
+    t.string   "passcode",      null: false
+    t.string   "status"
+    t.boolean  "active"
+    t.string   "logo"
+    t.string   "contact_name"
+    t.string   "contact_phone"
+    t.string   "contact_email"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "customers", force: :cascade do |t|
+    t.integer  "agency_id",       null: false
     t.string   "company_name"
     t.string   "requester_name"
     t.string   "requester_email"
@@ -52,29 +53,13 @@ ActiveRecord::Schema.define(version: 20150519121541) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "interpreters", force: :cascade do |t|
-    t.integer  "user_id",         null: false
-    t.string   "last_name",       null: false
-    t.string   "first_name",      null: false
-    t.string   "middle_name"
-    t.string   "title"
-    t.string   "prefix"
-    t.string   "suffix"
-    t.string   "gender"
-    t.integer  "default_payrate"
-    t.boolean  "certified"
-    t.string   "certification"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
   create_table "jobs", force: :cascade do |t|
+    t.integer  "agency_id",            null: false
     t.string   "status",               null: false
     t.integer  "customer_id",          null: false
-    t.integer  "consumer_id",          null: false
+    t.integer  "consumer_id"
     t.integer  "interpreter_id"
     t.string   "description",          null: false
-    t.datetime "starts_on",            null: false
     t.datetime "starts_at",            null: false
     t.integer  "duration",             null: false
     t.boolean  "repeats",              null: false
@@ -114,7 +99,7 @@ ActiveRecord::Schema.define(version: 20150519121541) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "phones", ["phoneable_id"], name: "index_phones_on_phoneable_id"
+  add_index "phones", ["phoneable_type", "phoneable_id"], name: "index_phones_on_phoneable_type_and_phoneable_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -127,8 +112,18 @@ ActiveRecord::Schema.define(version: 20150519121541) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "agency_id",                           null: false
     t.string   "username"
     t.integer  "roles_mask"
+    t.text     "notes"
+    t.integer  "default_payrate"
+    t.string   "last_name"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "title"
+    t.string   "prefix"
+    t.string   "suffix"
+    t.string   "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

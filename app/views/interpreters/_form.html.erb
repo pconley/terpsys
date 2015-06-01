@@ -1,17 +1,10 @@
-<%= simple_form_for(@interpreter) do |f| %>
+<%= render 'partials/model_errors', resource: @user %>
 
-  <%= render 'partials/model_errors', resource: @interpreter %>
+<%= f.input :username %>
+<%= f.input :email %>  
+<%= f.input :password %>
+<%= f.input :last_name %>
+<%= f.input :first_name %>
+<%= f.input :default_payrate, label: 'Default Payrate (cents)' %>
 
-  <%= f.simple_fields_for :user do |p| %>
-  	<%= p.input :username %>
-  	<%= p.input :email %>
-  	<%= p.input :password %>
-  <% end %>
-  
-  <%= f.input :last_name %>
-  <%= f.input :first_name %>
-  <%= f.input :default_payrate, collection: [30,35,40], prompt: "Select your rate" %>
-
-  <%= f.button :submit, class: 'button-create' %>
-
-<% end %>
+<%= f.button :submit, 'Save Interpreter', class: 'button-create' %>

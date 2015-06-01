@@ -13,6 +13,7 @@ gem 'devise', '~> 3.4.0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
+gem "simple_calendar", "~> 1.1.0"
 gem 'simple_form'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'

@@ -21,6 +21,9 @@
 require 'devise'
 
 RSpec.configure do |config|
+  
+  config.include Devise::TestHelpers, type: :request
+  config.include Devise::TestHelpers, type: :controller
     
   config.before(:each) do
     # QsmConcern.stub(:get_user_qsm_id){ "stub_qsm_id" }

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.order('created_at DESC').all
+    @users = current_agency.users.order('created_at DESC').all
   end
 
   def show
