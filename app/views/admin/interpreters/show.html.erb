@@ -1,0 +1,9 @@
+<h3>#<%= @interpreter.id %>: <%= @interpreter.username %> (<%= @interpreter.email %>)</h3>
+<p><strong>Roles: </strong><%= @interpreter.roles_to_s %></p>
+<p><strong>Default Rate: </strong><%= format_as_dollars(@interpreter.default_payrate) %></p>
+
+<%= link_to 'Edit Interpreter Details', edit_admin_interpreter_path(@interpreter) %> |
+<%= link_to 'Go to Interpreters List', admin_interpreters_path %>
+
+<%= render 'partials/jobs_month', resource: @interpreter, events: @interpreter.interpreter_jobs, view: :interpreter %>
+<%= render 'partials/jobs_table', resource: @interpreter, events: @interpreter.interpreter_jobs, view: :interpreter %>

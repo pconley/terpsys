@@ -1,0 +1,9 @@
+<%= render 'partials/model_errors', resource: @customer %>
+
+<%= f.input :company_name %>
+<%= f.input :requester_name %>  
+<%= f.input :requester_email %>
+<%= f.input :billing_email %>
+<%= f.input :billing_rate %>
+
+<%= f.button :submit, 'Save Consumer', class: 'button-create' %>

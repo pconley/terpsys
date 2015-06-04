@@ -3,9 +3,9 @@
 
   <%= render 'partials/model_errors', resource: @job %>
 
-  <%= f.label :starts_on %>
+  <%= f.label :starts_at %>
   <% today = Date.today.strftime("%m/%d/%Y") %>
-  <input type="text" id='job_starts_on' name='job[starts_on]' data-provide='datepicker' 
+  <input type="text" id='job_starts_at' name='job[starts_at]' data-provide='datepicker' 
 		value='<%= today %>' data-date-start-date='<%= today %>' data-date-format='yyyy-mm-dd' >
   &nbsp;<%= f.label :at %>
   <span class="bootstrap-timepicker"><input id="job_starts_at" 

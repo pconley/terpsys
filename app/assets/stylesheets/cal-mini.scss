@@ -1,4 +1,4 @@
-.job-calendar {
+.mini-calendar {
   border-collapse: collapse;
   width: 100%;
 
@@ -13,33 +13,20 @@
     background: #DDD;
     color: #666;
     text-align: center;
-    min-width: 150px;
+    min-width: 40px;
   }
 
   td {
     color: #777;
-    height: 80px;
+    height: 40px;
     vertical-align: top;
-    font-size: 16px;
+    font-size: 10px;
   }
 
   .notmonth, .notmonth a { color: #CCC; }
-  .today { background-color: #D7F2FF; }
+  .today      { background-color: #D7F2FF; }
+  .next-month { background-color: yellow; }
+
 }
 
-#articles #month {
-  margin: 0;
-  padding-bottom: 10px;
-  text-align: center;
-  font-size: 22px;
-  a {
-    text-decoration: none;
-    padding: 0 10px;
-    color: #999;
-  }
-}
 
-#articles ul {
-  font-size: 11px;
-  padding-left: 20px;
-}

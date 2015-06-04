@@ -22,10 +22,10 @@
         <td><%= job.id %></td>
         <td><%= job.state.to_s.capitalize %></td>
 		<% if view != :interpreter %>
-			  <td><%= job.interpreter.try(:username) %></td>
+			  <td><%= job.interpreter.username %></td>
 		<% end %>
 		<% if view != :consumer %>
-			  <td><%= job.consumer.try(:fullname) %></td>
+			  <td><%= job.consumer.fullname %></td>
 		<% end %>
         <td><%= job.when %></td>
         <td><%= job.description %></td>

@@ -18,15 +18,13 @@
       <tr>
         <td><%= job.id %></td>
         <td><%= job.state.to_s.capitalize %></td>
-        <td><%= job.consumer.try(:username) %></td>
-        <td><%= job.interpreter.try(:email) %></td>
+        <td><%= job.consumer.username %></td>
+        <td><%= job.interpreter.email %></td>
         <td><%= job.when %></td>
         <td><%= job.description %></td>
-		<% if view == :admin %>
-        	<td><%= link_to 'Show',      admin_job_path(job), class: 'button-show' %></td>
-        	<td><%= link_to 'Edit', edit_admin_job_path(job), class: 'button-edit' %></td>
-        	<td><%= link_to 'Destroy',  admin_jobs_path(job), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-destroy' %></td>
-		<% end %>
+        <td><%= link_to 'Show', show_job_path(job,:admin), class: 'button-show' %></td>
+        <td><%= link_to 'Edit', edit_job_path(job,:admin), class: 'button-edit' %></td>
+        <td><%= link_to 'Destroy',  jobs_path(job,:admin), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-destroy' %></td>
       </tr>
     <% end %>
   </tbody>

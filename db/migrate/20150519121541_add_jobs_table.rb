@@ -10,14 +10,13 @@ class AddJobsTable < ActiveRecord::Migration
       t.integer :interpreter_id
       
       t.string    :description,   null: false
-      # location is a polymorphic address
       t.timestamp :starts_at,     null: false
+      t.timestamp :start_time,    null: false
       t.integer   :duration,      null: false
       t.boolean   :repeats,       null: false
       t.string    :repeat_style
       t.string    :repeat_pattern
       t.timestamp :ends_on
-      t.timestamp :ends_by
       
       t.timestamp :requested_at, null: false
       t.string    :requested_by_name
@@ -44,6 +43,9 @@ class AddJobsTable < ActiveRecord::Migration
       t.integer :milage_rate
       
       t.integer :expenses
+      
+      t.integer :created_id
+      t.integer :updated_id
       
       t.timestamps null: false
     end

@@ -61,12 +61,12 @@ ActiveRecord::Schema.define(version: 20150526111930) do
     t.integer  "interpreter_id"
     t.string   "description",          null: false
     t.datetime "starts_at",            null: false
+    t.datetime "start_time",           null: false
     t.integer  "duration",             null: false
     t.boolean  "repeats",              null: false
     t.string   "repeat_style"
     t.string   "repeat_pattern"
     t.datetime "ends_on"
-    t.datetime "ends_by"
     t.datetime "requested_at",         null: false
     t.string   "requested_by_name"
     t.string   "requested_by_email"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 20150526111930) do
     t.integer  "payroll_miles"
     t.integer  "milage_rate"
     t.integer  "expenses"
+    t.integer  "created_id"
+    t.integer  "updated_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end

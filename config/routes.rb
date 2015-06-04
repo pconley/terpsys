@@ -1,16 +1,24 @@
 Rails.application.routes.draw do
 
   root to: "public#home"
-
-  get 'admin/dash' => 'public#dashboard', as: :admin_dash
-  get 'consumer/dash' => 'public#dashboard', as: :consumer_dash
-  get 'interpreter/dash' => 'interpreter#dash', as: :interpreter_dash
   
   devise_for :users
   
-  resources :jobs
-  resources :users
-  resources :consumers
-  resources :customers
-  resources :interpreters
+  devise_scope :user do
+    get 'login' => 'users/sessions#new', as: "login" # published url
+    get 'logout' => 'users/sessions#destroy', as: "logout" # published url
+  end
+    
+  namespace :admin do
+    get 'dashboard' => 'dashboard#show'
+    resources :jobs
+    resources :users
+    resources :customers
+    resources :consumers
+    resources :interpreters
+  end
+  
+  get 'consumer/dash' => 'public#dashboard', as: :consumer_dash
+  get 'interpreter/dash' => 'interpreter#dash', as: :interpreter_dash
+  
 end

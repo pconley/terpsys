@@ -58,6 +58,9 @@ class User < ActiveRecord::Base
     name += "#{middle_name}. " if middle_name && middle_name.length == 1
     name += "#{last_name}"     if last_name
     name += " #{suffix}"       if suffix
+    
+    name = email if name.strip.length == 0
+    
     return name
   end
 

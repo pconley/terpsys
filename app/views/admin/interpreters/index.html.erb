@@ -1,0 +1,33 @@
+<h1>Interpreters</h1>
+
+<div class="table-responsive">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gigs</th>
+      <th>Default Rate</th>
+      <th>Email</th>
+      <th>Roles</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @interpreters.each do |interpreter| %>
+      <tr>
+        <td><%= interpreter.username %></td>
+        <td><%= interpreter.interpreter_jobs.count %></td>
+        <td><%= format_as_dollars(interpreter.default_payrate) %></td>
+        <td><%= interpreter.email %></td>
+        <td><%= interpreter.roles_to_s %></td>
+        <td><%= link_to 'Show', admin_interpreter_path(interpreter), class: 'button-show' %></td>
+        <td><%= link_to 'Edit', edit_admin_interpreter_path(interpreter), class: 'button-edit' %></td>
+        <td><%= link_to 'Destroy', admin_interpreter_path(interpreter), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-destroy' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+<%= link_to 'New Interpreter', new_admin_interpreter_path, class: 'button-create' %>

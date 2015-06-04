@@ -1,0 +1,23 @@
+<%= render 'partials/model_errors', resource: @user %>
+
+<%= f.label :username %>
+<%= f.input_field :username %>
+<br>
+<%= f.label :email %>
+<%= f.input_field :email %>
+<br>
+<%= f.label :password %>
+<%= f.input_field :password %>
+<br>
+<%= f.label :last_name %>
+<%= f.input_field :last_name %>
+<br>
+<%= f.label :first_name %>
+<%= f.input_field :first_name %>
+<br>
+<%= f.label 'Payrate' %>
+<%= f.input_field :default_payrate %> cents
+<br>
+<br>
+<%= f.button :submit, 'Save Interpreter', class: 'button-create' %>
+

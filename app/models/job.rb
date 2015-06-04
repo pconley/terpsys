@@ -11,6 +11,8 @@ class Job < ActiveRecord::Base
   
   belongs_to :agency
   belongs_to :customer  
+  belongs_to :created,     :class_name => "User", :foreign_key => "created_id"
+  belongs_to :updated,     :class_name => "User", :foreign_key => "updated_id"
   belongs_to :consumer,    :class_name => "User", :foreign_key => "consumer_id"
   belongs_to :interpreter, :class_name => "User", :foreign_key => "interpreter_id"
   
@@ -27,7 +29,7 @@ class Job < ActiveRecord::Base
   end
     
   def when
-    "#{starts_at.strftime('%Y-%m-%d')} @ #{starts_at.strftime('%H:%M')} for #{duration} mins"
+    "#{starts_at.strftime('%-m/%-d')} @ #{start_time.strftime('%l:%M %P')} for #{duration} mins"
   end
   
   def to_s

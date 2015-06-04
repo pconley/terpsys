@@ -1,0 +1,11 @@
+<h3>Consumer#<%= @consumer.id %>: <%= @consumer.email %></h3>
+
+<p><strong>Name: </strong><%= @consumer.fullname %></p>
+
+<%= link_to 'Edit Consumer Info', edit_admin_consumer_path(@consumer) %> |
+<%= link_to 'Go to Consumers List', admin_consumers_path %>
+
+<%= render 'partials/jobs_month', resource: @consumer, events: @consumer.consumer_jobs, view: :consumer %>
+<%= render 'partials/jobs_table', resource: @consumer, events: @consumer.consumer_jobs, view: :consumer %>
+<%= render 'partials/jobs_action', resource: @consumer, events: @consumer.consumer_jobs, view: :consumer %>
+

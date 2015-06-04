@@ -1,0 +1,59 @@
+
+<%= simple_form_for([:admin,@job]) do |f| %>
+
+  <%= render 'partials/model_errors', resource: @job %>
+
+  <%= f.label :on %>
+  <input type="text" id='job_starts_at' name='job[starts_at]' value='<%= @job.starts_at.to_date.strftime('%-m/%-d/%y') %>'>
+  <br>
+
+  <%= f.label :at %>
+  <div class='input-append bootstrap-datepicker-component' style='display: inline;'>
+	  <input class='dateselect-time input-small' name='job[start_time]' type='text' value='1:00 PM'>
+  </div>
+  <br>
+
+  <%= f.label :for %>
+  <%= f.input_field :duration, collection: ['30', '60', '90', '120', '360'], include_blank: false %> duration
+  <br>
+
+  <%= f.label :repeats %>
+  <%= f.input_field :repeat_style, collection: ['None', 'Monthly', 'Weekly', 'Weekdays', 'Daily'], include_blank: false %>
+  <br>
+
+  <%= f.label :until %>
+  <input type="text" id='job_ends_on' name='job[ends_on]' data-provide='datepicker' >
+  <br>
+
+  <%= f.label :description %>
+  <%= f.input_field :description, style:"width: 400px !important;" %>
+  <br>
+
+  <%= f.label :consumer %>
+  <%= f.input_field :consumer, collection: @job.agency.consumers, name:'job[consumer_id]', label_method: :fullname, include_blank: false %>
+  <br>
+
+  <%= f.label :customer %>
+  <%= f.input_field :customer, collection: @job.agency.customers, name:'job[customer_id]', label_method: :company_name, include_blank: false %>
+  <br>
+
+  <%= f.label :interpreter %>
+  <%= f.input_field :interpreter, collection: @job.agency.interpreters, name:'job[interpreter_id]', label_method: :email, include_blank: false %>
+  <br>
+
+  <%= f.button :submit, class: 'button-create' %>
+
+<% end %>
+
+<script type="text/javascript">
+  $('#job_starts_at').datepicker({
+	format: 'mm/dd/yy',
+    startDate: '+1d'  
+  });
+  $('.dateselect-time').timepicker({
+      minuteStep: 15,
+      showInputs: true,
+      disableFocus: true
+  });
+</script>
+

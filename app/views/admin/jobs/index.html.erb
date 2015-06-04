@@ -1,0 +1,7 @@
+<h1>All Jobs</h1>
+
+<%= link_to 'Schedule a New Job', new_admin_job_path(:admin), class: 'button-create' %>
+
+<%= render 'partials/jobs_month',  events: @jobs, view: :admin %>
+<%= render 'partials/jobs_table',  events: @jobs, view: :admin %>
+<%= render 'partials/jobs_action', events: @jobs, view: :admin %>

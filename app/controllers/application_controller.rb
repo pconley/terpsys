@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     return interpreter_dash_path if resource.try(:interpreter?)
     return consumer_dash_path    if resource.try(:consumer?)
-    return admin_dash_path       if resource.try(:admin?)
+    return admin_dashboard_path  if resource.try(:admin?)
     root_path
   end
   

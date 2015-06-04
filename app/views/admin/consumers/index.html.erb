@@ -1,0 +1,30 @@
+<h1>Consumers</h1>
+
+<table class="table table-hover">  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Jobs</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @consumers.each do |consumer| %>
+      <tr>
+        <td><%= consumer.id %></td>
+        <td><%= consumer.fullname %></td>
+        <td><%= consumer.consumer_jobs.count %></td>
+        <td><%= consumer.email %></td>
+        <td><%= link_to 'Show', admin_consumer_path(consumer), class: 'button-show' %></td>
+        <td><%= link_to 'Edit', edit_admin_consumer_path(consumer), class: 'button-edit' %></td>
+        <td><%= link_to 'Destroy', admin_consumer_path(consumer), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-destroy' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Consumer', new_admin_consumer_path, class: 'button-create' %>

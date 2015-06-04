@@ -1,0 +1,43 @@
+<h1>Dashboard</h1>
+
+<div class='row'>
+	<div class="col-md-4">
+		<div class='calendar mini-calendar'>
+			<%= month_calendar events: @jobs do |date,jobs| %>
+				<strong><%= date.strftime("%-d") %></strong>
+				<% if jobs.count > 0 %>
+					<p><%= pluralize(jobs.count, 'Job')%></p>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Panel title</h3>
+		  </div>
+			<div class="panel-body">
+				<p><%= link_to "#{@consumers.count} Consumers...", admin_consumers_path %></p>
+				<p><%= link_to "#{@customers.count} Customers...", admin_customers_path %></p>
+				<p><%= link_to "#{@interpreters.count} Interpreters...", admin_interpreters_path %></p>
+				<p><%= link_to "#{@jobs.count} Jobs...", admin_jobs_path %></p>
+			</div>
+			<div class="panel-footer">Panel footer</div>
+		</div>
+	</div>
+</div>
+<div class='row'>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<%= link_to 'Schedule a New Job', new_admin_job_path(:admin), class: 'button-create' %>
+			<%= link_to 'Register a New Interpreter', new_admin_interpreter_path, class: 'button-create' %>
+		</div>
+	</div>
+</div>
+
+<script>
+$('.day').click( function(event) {
+  var clicked_div = $(this);
+  console.log('clicked a day')
+});
+</script>

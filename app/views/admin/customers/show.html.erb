@@ -1,0 +1,10 @@
+<h2><%= @customer.company_name %></h2>
+
+<p> <strong>Requester Name:</strong> <%= @customer.requester_name %> </p>
+<p> <strong>Requester Email:</strong> <%= @customer.requester_email %> </p>
+
+<%= link_to 'Edit this customer', edit_admin_customer_path(@customer) %> |
+<%= link_to 'Back to Customers List', admin_customers_path %>
+
+<%= render 'partials/jobs_month', resource: @customer, events: @customer.jobs, view: :admin %>
+<%= render 'partials/jobs_table', resource: @customer, events: @customer.jobs, view: :customer %>

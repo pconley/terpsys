@@ -1,8 +1,0 @@
-<h1>Edit Interpreter</h1>
-
-<%= simple_form_for(@user, :url => { :controller => "interpreters", :action => "update" },) do |f| %>
-  <%= render 'form', f: f, resource: @user %>
-<% end %>
-
-<%= link_to 'Show Details', interpreter_path(@user) %> |
-<%= link_to 'Go to Interpreters', interpreters_path %>
