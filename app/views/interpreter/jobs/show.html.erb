@@ -1,0 +1,57 @@
+<h2>Job#<%= @job.id %></h2>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+		  <div class="panel-heading">Customer</div>
+		  <div class="panel-body">
+			<p><span class="glyphicon glyphicon-briefcase" aria-hidden="true">&nbsp;</span><%= @job.customer.company_name %></p>
+			<p><span class="glyphicon glyphicon-calendar" aria-hidden="true">&nbsp;</span><%= @job.requested_at.strftime('%Y-%m-%d %H:%M') %></p>
+			<p><span class="glyphicon glyphicon-user"     aria-hidden="true">&nbsp;</span><%= @job.requested_by_name %></p>
+			<p><span class="glyphicon glyphicon-envelope" aria-hidden="true">&nbsp;</span><%= @job.requested_by_email %></p>
+			<p><span class="glyphicon glyphicon-phone"    aria-hidden="true">&nbsp;</span><%= @job.requested_by_phone %></p>
+		  </div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+		  <div class="panel-heading">Job Information</div>
+		  <div class="panel-body">
+			<p><strong>Consumer   : </strong><%= @job.consumer.try(:fullname) %></p>
+			<p><strong>Description: </strong><%= @job.description %></p>
+			<p><strong>When       : </strong><%= @job.when %></p>
+			<p><strong>Notes      : </strong></p>
+			<% if @job.repeats %>
+				<p><strong>Repeat Style: </strong><%= @job.repeat_style %></p>
+				<p><strong>Repeat Pattern: </strong><%= @job.repeat_pattern %></p>
+				<p><strong>Ends On: </strong><%= @job.ends_on.strftime('%Y-%m-%d')  if @job.ends_on %></p>
+			<% end %>
+		  </div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+		  <div class="panel-heading">Interpreter</div>
+		  <div class="panel-body">
+			<p><strong>Email: </strong><%= @job.interpreter.try(:email) %></p>
+			<p><strong>Rate : </strong><%= format_as_dollars(@job.interpreter.try(:default_payrate)) %></p>
+		  </div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+		  <div class="panel-heading">Agency Information</div>
+		  <div class="panel-body">
+			<p><strong>Status: </strong><%= @job.status %></p>
+			<p><strong>Created by: </strong><%= @job.created.try(:username) %></p>
+			<p><strong>State: </strong><%= @job.state.to_s.capitalize %></p>
+			<p><strong>Notes: </strong></p>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<%= link_to 'Edit This Job...', edit_admin_job_path(@job) %> |
+<%= link_to 'Go to Jobs List...', admin_jobs_path %>

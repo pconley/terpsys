@@ -9,7 +9,8 @@
 <body class="<%= controller_path.gsub('/','-') %> <%= action_name %>">
 <div class="container-fluid">
 	<%= render 'partials/debug_bar' %>
-	<%= render 'partials/header' %>
+	<!-- the header is set in the specific controller -->
+	<%= render @header_partial if @header_partial %>
 	<%= render 'partials/alerts' %>
 	<%= yield %>
 	<%= render 'partials/footer' %>

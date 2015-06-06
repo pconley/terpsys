@@ -60,13 +60,7 @@ class Admin::JobsController < Admin::BaseController
   end
 
   private
-  
-  def convert_date(field)
-    date_string = job_params[field] # '05/25/2015'
-    date_value = Date.strptime(date_string,"%m/%d/%Y") 
-    params['job'][field] = date_value.strftime('%Y-%m-%d')    
-  end
-  
+   
   def set_job
     @job = current_agency.jobs.find(params[:id])
   end

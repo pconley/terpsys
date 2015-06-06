@@ -1,9 +1,0 @@
-<h1>All Jobs</h1>
-
-<%= render 'partials/jobs_month',  events: @jobs, view: :all %>
-<%= render 'partials/jobs_table',  events: @jobs, view: :all %>
-<%= render 'partials/jobs_action', events: @jobs, view: :all %>
-
-<br>
-
-<%= link_to 'Schedule a New Job', new_job_path, class: 'button-create' %>

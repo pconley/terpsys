@@ -1,0 +1,12 @@
+<h3>Jobs (Month View)</h3>
+<div class='calendar job-calendar'>
+<%= month_calendar events: @jobs+@open_jobs do |date,jobs| %>
+	<%= date.strftime("%-d") %>
+	<% jobs.take(5).each do |job| %>
+		<div><%= link_to "#{job.state}##{job.id}", interpreter_job_path(job) %></div>
+  	<% end %>
+	<% if jobs.count > 5 %>
+		More...
+	<% end %>
+<% end %>
+</div>

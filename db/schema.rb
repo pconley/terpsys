@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20150526111930) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "agency_id",                           null: false
+    t.integer  "customer_id"
     t.string   "username"
     t.integer  "roles_mask"
     t.text     "notes"

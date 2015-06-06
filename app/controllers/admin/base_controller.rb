@@ -1,8 +1,8 @@
 class Admin::BaseController < ApplicationController
       
   before_action :authenticate_admin!
-
-  layout 'admin'
+  before_action :set_globals
+  
 
 private
 
@@ -13,6 +13,11 @@ private
   
   def after_sign_in_path_for(resource)
     admin_dashboard_path  if resource.try(:admin?)
+  end
+  
+  def set_globals
+    @dashboard_path = admin_dashboard_path
+    @header_partial = 'partials/header/header_admin'
   end
 
 end

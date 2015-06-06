@@ -11,6 +11,9 @@
 	  <% if view != :consumer %>
 	  	<th>Consumer</th>
 	  <% end %>
+	  <% if view != :customer %>
+	  	<th>Customer</th>
+	  <% end %>
       <th>When</th>
       <th>Description</th>
     </tr>
@@ -26,6 +29,9 @@
 		<% end %>
 		<% if view != :consumer %>
 			  <td><%= job.consumer.try(:fullname) %></td>
+		<% end %>
+		<% if view != :customer %>
+			  <td><%= job.customer.try(:company_name) %></td>
 		<% end %>
         <td><%= job.when %></td>
         <td><%= job.description %></td>

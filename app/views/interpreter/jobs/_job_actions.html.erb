@@ -1,0 +1,72 @@
+<h3>Your Jobs</h3>
+<div class="table-responsive">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Job#</th>
+      <th>State</th>
+	  <th>Consumer</th>
+	  <th>Customer</th>
+      <th>When</th>
+      <th>Description</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @jobs.on_day(Time.zone.now).each do |job| %>
+      <tr>
+        <td><%= job.id %></td>
+        <td><%= job.state.to_s.capitalize %></td>
+		<td><%= job.consumer.try(:fullname) %></td>
+		<td><%= job.customer.try(:company_name) %></td>
+        <td><%= job.when %></td>
+        <td><%= job.description %></td>
+        <td><%= link_to 'Edit', '#', class: 'button-edit' %></td>
+      </tr>
+    <% end %>
+    <% future_jobs = @jobs.after(Time.zone.now) %>
+    <% future_jobs.take(5).each do |job| %>
+      <tr>
+        <td><%= job.id %></td>
+        <td><%= job.state.to_s.capitalize %></td>
+		<td><%= job.consumer.try(:fullname) %></td>
+		<td><%= job.customer.try(:company_name) %></td>
+        <td><%= job.when %></td>
+        <td><%= job.description %></td>
+        <td><%= link_to 'Details', '#', class: 'button-edit' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'More Future Jobs...', '#' if future_jobs.count > 5 %>
+<h3>Open Jobs</h3>
+<div class="table-responsive">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Job#</th>
+      <th>State</th>
+	  <th>Consumer</th>
+	  <th>Customer</th>
+      <th>When</th>
+      <th>Description</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @open_jobs.take(3).each do |job| %>
+      <tr>
+        <td><%= job.id %></td>
+        <td><%= job.state.to_s.capitalize %></td>
+		<td><%= job.consumer.try(:fullname) %></td>
+		<td><%= job.customer.try(:company_name) %></td>
+        <td><%= job.when %></td>
+        <td><%= job.description %></td>
+        <td><%= link_to 'Accept', '#', class: 'button-edit' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<%= link_to 'More Open Jobs...', '#' if @open_jobs.count > 3 %>

@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default">
+	<%= render 'partials/header/header_left' %>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+		   <li class="active"><%= link_to 'Jobs', interpreter_jobs_path %><span class="sr-only">(current)</span></a></li>
+		   <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage! <span class="caret"></span></a>
+		          <ul class="dropdown-menu" role="menu">
+			    	<li class="active"><%= link_to 'Notes', '#' %><span class="sr-only">(current)</span></a></li>
+			        <li class="divider"></li>
+			        <li><%= link_to 'Invoices', '#' %></li>
+			        <li><%= link_to 'Pay History', '#' %></li>
+					<li class="divider"></li>
+			        <li><%= link_to 'Profile', '#' %></li>
+		          </ul>
+		     </li>
+      </ul>
+
+	<%= render 'partials/header/header_right' %>
+	
+    </div><!-- /.navbar-collapse -->
+</nav>

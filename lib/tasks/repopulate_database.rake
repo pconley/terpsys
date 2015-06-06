@@ -24,11 +24,17 @@ namespace :db do
       
       FactoryGirl.create(:admin, email:"admin@#{code}.com", agency: agency)
       FactoryGirl.create(:consumer, email:"cons@#{code}.com", agency: agency)
+      x = FactoryGirl.create(:customer, agency: agency)
+      x.requesters << FactoryGirl.create(:user, email:"req@#{code}.com", agency: agency, roles: [:requester])
       FactoryGirl.create(:interpreter, email:"terp@#{code}.com", agency: agency)
       
       for i in 0..5 # customers
          x = FactoryGirl.create(:customer, agency: agency)
          puts "-- customer: #{x}"
+         for j in 0..2
+           r = x.requesters << FactoryGirl.create(:user, agency: agency, roles: [:requestor])
+           puts "---- requestor: #{r}"
+         end
       end
       for i in 0..5 # interpreters
          x = FactoryGirl.create(:interpreter, agency: agency)
@@ -38,10 +44,10 @@ namespace :db do
          x = FactoryGirl.create(:consumer, agency: agency)
          puts "-- consumer: #{x} #{x.address}"
       end
-      for i in 0..30 # jobs
+      for i in 0..40 # jobs
         consumer = agency.consumers.sample
         customer = agency.customers.sample
-        interpreter = agency.interpreters.sample
+        interpreter = ([nil]+agency.interpreters.to_a).sample
         FactoryGirl.create(:job, agency: agency, customer: customer, consumer: consumer, interpreter: interpreter)
       end
       

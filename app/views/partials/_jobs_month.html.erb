@@ -3,9 +3,10 @@
 <%= month_calendar events: events do |date,jobs| %>
 	<%= date.strftime("%-d") %>
 	<% jobs.take(5).each do |job| %>
-		<% if view == :admin %>
-    		<div><%= link_to "Job##{job.id}", admin_job_path(job) %></div>
-    	<% end %>
+		<% path = '#' # default %>
+		<% path =       admin_job_path(job) if view == :admin %>
+		<% path = interpreter_job_path(job) if view == :interpreter %>
+		<div><%= link_to "#{job.status}##{job.id}", path %></div>
   	<% end %>
 	<% if jobs.count > 5 %>
 		More...

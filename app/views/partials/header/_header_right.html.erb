@@ -1,0 +1,9 @@
+<ul class="nav navbar-nav navbar-right">
+<% if current_user %>
+  	<li><%= link_to(current_user.email, '#') %></li>
+  	<li><%= link_to("LOGOUT", destroy_user_session_path, method: :delete, :class => "menu_item_orange") %></li>
+<% else %>
+	<li><%= link_to("LOGIN", new_user_session_path, :class => "menu_item_orange") %></li>
+<% end %>
+</ul>
+

@@ -5,8 +5,15 @@
     <tr>
       <th>Job#</th>
       <th>State</th>
-      <th>Consumer</th>
-      <th>Interpreter</th>
+	  <% if view != :interpreter %>
+	  	<th>Interpreter</th>
+	  <% end %>
+	  <% if view != :consumer %>
+	  	<th>Consumer</th>
+	  <% end %>
+	  <% if view != :customer %>
+	  	<th>Customer</th>
+	  <% end %>
       <th>When</th>
       <th>Description</th>
       <th colspan="3"></th>
@@ -18,8 +25,15 @@
       <tr>
         <td><%= job.id %></td>
         <td><%= job.state.to_s.capitalize %></td>
-        <td><%= job.consumer.try(:username) %></td>
-        <td><%= job.interpreter.try(:email) %></td>
+		<% if view != :interpreter %>
+			  <td><%= job.interpreter.try(:username) %></td>
+		<% end %>
+		<% if view != :consumer %>
+			  <td><%= job.consumer.try(:fullname) %></td>
+		<% end %>
+		<% if view != :customer %>
+			  <td><%= job.customer.try(:company_name) %></td>
+		<% end %>
         <td><%= job.when %></td>
         <td><%= job.description %></td>
 		<% if view == :admin %>

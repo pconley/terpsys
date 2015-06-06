@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates :default_payrate, numericality: { only_integer: true, greater_than_or_equal_to: 30 }, if: :interpreter?
     
   belongs_to :agency 
+  belongs_to :customer # if a requester 
   has_one    :address, :as => :addressable
   has_many   :phones,  :as => :phoneable
   
@@ -19,7 +20,7 @@ class User < ActiveRecord::Base
   
   scope :with_role, ->(role) { where("roles_mask & #{2**ROLES.index(role)} > 0") }
   
-  ROLES = %i[admin consumer interpreter]
+  ROLES = %i[admin consumer interpreter requester]
   
   def roles=(roles)
     roles = [*roles].map { |r| r.to_sym }
@@ -38,6 +39,9 @@ class User < ActiveRecord::Base
   
   def interpreter?
     has_role? :interpreter
+  end
+  def requester?
+    has_role? :requester
   end
   def consumer?
     has_role? :consumer

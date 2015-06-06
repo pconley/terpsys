@@ -16,20 +16,54 @@ class Job < ActiveRecord::Base
   belongs_to :consumer,    :class_name => "User", :foreign_key => "consumer_id"
   belongs_to :interpreter, :class_name => "User", :foreign_key => "interpreter_id"
   
+  scope :open,     -> { where(interpreter_id: nil) }  
+  scope :assigned, -> { where.not(interpreter_id: nil) }  
+
+  scope :before, ->(date) { where("starts_at < ?", date.beginning_of_day) }
+  scope :after,  ->(date) { where("starts_at > ?", date.end_of_day) }
+  scope :on_day, ->(date) { where(starts_at: date.beginning_of_day..date.end_of_day) }
+  
+  scope :past, -> { before(Time.zone.now.to_date) }
+  scope :today, -> { on_day(Time.zone.now.to_date) }
+  scope :future, -> { after(Time.zone.now.to_date) }
+  
   attr_accessor :duration_string
   
   extend SimpleCalendar
   
   has_calendar
   
+  # before_save :clean_up_data
+  # def clean_up_data
+  #   # strip off any time in the starts_at field
+  #   self.starts_at = self.starts_at.to_date
+  # end
+  
   def state
-    return :past if starts_at < Time.zone.now
+    return :past  if starts_at.to_date < Time.zone.now.to_date
     return :open unless interpreter
-    :pending
-  end
+    return :today if starts_at.to_date == Time.zone.now.to_date
+    :pending # future
+  end    
     
   def when
-    "#{starts_at.strftime('%-m/%-d')} @ #{start_time.strftime('%l:%M %P')} for #{duration} mins"
+    date_string = starts_today? ? 'Today' : starts_at.strftime('%-m/%-d')
+    "#{date_string} @ #{start_time.strftime('%l:%M %P')} for #{duration_string}"
+  end
+  
+  def starts_today?
+    Time.zone.now.to_date == starts_at.to_date
+  end
+  
+  def duration_string
+    case duration
+      when 60 
+        '1 hour'
+      when 120
+        '2 hours'
+      else
+        "#{duration} mins"
+      end
   end
   
   def to_s

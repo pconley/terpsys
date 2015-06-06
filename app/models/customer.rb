@@ -12,7 +12,9 @@ class Customer < ActiveRecord::Base
   has_many :jobs
   
   belongs_to :agency
-    
+  
+  has_many :requesters, foreign_key: "customer_id", class_name: "User"
+  
   def to_s
     "<Customer#{id} #{company_name}>"
   end

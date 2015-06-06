@@ -31,6 +31,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
               
       t.integer :agency_id, null: false          
+      t.integer :customer_id         
       t.string  :username
       t.integer :roles_mask
       

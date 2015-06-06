@@ -1,0 +1,54 @@
+<h1>Dashboard (Customer)</h1>
+
+<div class='row'>
+	<div class="col-md-4">
+		<div class='calendar mini-calendar'>
+			<%= month_calendar events: @jobs do |date,jobs| %>
+				<strong><%= date.strftime("%-d") %></strong>
+				<% if jobs.count > 0 %>
+					<p><%= pluralize(jobs.count, 'Job')%></p>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Company</h3>
+		  </div>
+			<div class="panel-body">
+				<p><%= link_to "Notes...", admin_consumers_path %></p>
+				<p><%= link_to "Past Jobs (#{@jobs.past.count})...", customer_jobs_path %></p>
+				<p><strong><%= link_to "Jobs Today (#{@jobs.today.count})...", customer_jobs_path %></strong></p>
+				<p><%= link_to "Pending Jobs (#{@jobs.future.count})...", customer_jobs_path %></p>
+				<p><%= link_to "Consumer Notes...", '#' %></p>
+				<p><%= link_to "Invoices...", '#' %></p>
+				<p><%= link_to "Profile...", '#' %></p>
+			</div>
+			<div class="panel-footer">Panel footer</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Personal</h3>
+		  </div>
+			<div class="panel-body">
+				<p><%= link_to "My Notes...", admin_consumers_path %></p>
+				<p><%= link_to "My Past Jobs (#{@jobs.past.count})...", customer_jobs_path %></p>
+				<p><strong><%= link_to "My Jobs Today (#{@jobs.today.count})...", customer_jobs_path %></strong></p>
+				<p><%= link_to "My Pending Jobs (#{@jobs.future.count})...", customer_jobs_path %></p>
+				<p><%= link_to "My Consumer Notes...", '#' %></p>
+				<p><%= link_to "My Profile...", '#' %></p>
+			</div>
+			<div class="panel-footer">Panel footer</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$('.day').click( function(event) {
+  var clicked_div = $(this);
+  console.log('clicked a day')
+});
+</script>

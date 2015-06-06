@@ -11,6 +11,12 @@ FactoryGirl.define do
     roles [:admin]
   end
   
+  factory :requester, parent: :user do
+    roles [:requester]
+    customer { FactoryGirl.create(:customer) }
+  end
+  
+  
   factory :consumer, parent: :user do
     roles [:consumer]
     last_name   { Faker::Name.last_name }

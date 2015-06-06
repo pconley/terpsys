@@ -1,5 +1,5 @@
 
-<%= simple_form_for([:admin,@job]) do |f| %>
+<%= simple_form_for([:customer,@job]) do |f| %>
 
   <%= render 'partials/model_errors', resource: @job %>
 
@@ -31,14 +31,6 @@
 
   <%= f.label :consumer %>
   <%= f.input_field :consumer, collection: @job.agency.consumers, name:'job[consumer_id]', label_method: :fullname, include_blank: false %>
-  <br>
-
-  <%= f.label :customer %>
-  <%= f.input_field :customer, collection: @job.agency.customers, name:'job[customer_id]', label_method: :company_name, include_blank: false %>
-  <br>
-
-  <%= f.label :interpreter %>
-  <%= f.input_field :interpreter, collection: @job.agency.interpreters, name:'job[interpreter_id]', label_method: :email, include_blank: false %>
   <br>
 
   <%= f.button :submit, class: 'button-create' %>

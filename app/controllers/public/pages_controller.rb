@@ -1,9 +1,8 @@
-class PublicController < ApplicationController
-  
-  skip_before_action :authenticate_user!
+class Public::PagesController < Public::BaseController
     
   def home
     @title = "public home page"
+    @header_partial = 'partials/header/header'
   end
   
   def dashboard
